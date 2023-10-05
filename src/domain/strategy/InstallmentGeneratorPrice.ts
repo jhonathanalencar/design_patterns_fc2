@@ -1,5 +1,5 @@
 import { InstallmentGenerator } from "./InstallmentGenerator";
-import { Installment } from "./Installment";
+import { Installment } from "../entity/Installment";
 import currency from "currency.js";
 
 export class InstallmentGeneratorPrice implements InstallmentGenerator {
@@ -10,6 +10,7 @@ export class InstallmentGeneratorPrice implements InstallmentGenerator {
     loanRate: number
   ): Promise<Installment[]> {
     const installments: Installment[] = [];
+
     let balance = currency(loanAmount);
     let rate = loanRate / 100;
     let installmentNumber = 1;

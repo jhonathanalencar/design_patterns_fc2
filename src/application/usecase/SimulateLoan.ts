@@ -1,6 +1,6 @@
 import { Installment } from "../../domain/entity/Installment";
-import { LoanPrice } from "../../domain/entity/LoanPrice";
-import { LoanSac } from "../../domain/entity/LoanSac";
+import { LoanPrice } from "../../domain/factoryMethod/LoanPrice";
+import { LoanSac } from "../../domain/factoryMethod/LoanSac";
 import { Usecase } from "./Usecase";
 
 export class SimulateLoan implements Usecase {

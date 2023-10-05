@@ -1,6 +1,6 @@
 import { Installment } from "../../domain/entity/Installment";
 import { Loan } from "../../domain/entity/Loan";
-import { InstallmentGeneratorFactory } from "../../domain/factory/InstallmentGeneratorFactory";
+import { InstallmentGeneratorSimpleFactory } from "../../domain/factory/InstallmentGeneratorSimpleFactory";
 import { RepositoryAbstractFactory } from "../factory/RepositoryAbstractFactory";
 import { LoanRepository } from "../repository/LoanRepository";
 import { InstallmentRepository } from "../repository/installmentRepository";
@@ -24,7 +24,8 @@ export class RequestLoan implements Usecase {
     await this.loanRepository.save(
       new Loan(input.code, amount, loanPeriod, loanRate, loanType, input.salary)
     );
-    const generateInstallments = InstallmentGeneratorFactory.create(loanType);
+    const generateInstallments =
+      InstallmentGeneratorSimpleFactory.create(loanType);
     const installments = await generateInstallments.generate(
       input.code,
       amount,

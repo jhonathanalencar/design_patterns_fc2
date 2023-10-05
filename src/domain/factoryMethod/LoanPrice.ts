@@ -1,7 +1,7 @@
 import currency from "currency.js";
 
 import { AbstractLoan } from "./AbstractLoan";
-import { Installment } from "./Installment";
+import { Installment } from "../entity/Installment";
 
 export class LoanPrice extends AbstractLoan {
   generateInstallments(): Installment[] {

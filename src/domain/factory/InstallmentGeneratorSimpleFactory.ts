@@ -1,7 +1,7 @@
-import { InstallmentGeneratorPrice } from "../entity/InstallmentGeneratorPrice";
-import { InstallmentGeneratorSac } from "../entity/InstallmentGeneratorSac";
+import { InstallmentGeneratorPrice } from "../strategy/InstallmentGeneratorPrice";
+import { InstallmentGeneratorSac } from "../strategy/InstallmentGeneratorSac";
 
-export class InstallmentGeneratorFactory {
+export class InstallmentGeneratorSimpleFactory {
   static create(type: string) {
     if (type === "price") {
       return new InstallmentGeneratorPrice();

@@ -1,20 +1,16 @@
-import { InstallmentGenerator } from "./InstallmentGenerator";
-import { Installment } from "./Installment";
 import currency from "currency.js";
 
-export class InstallmentGeneratorSac implements InstallmentGenerator {
-  async generate(
-    loanCode: string,
-    loanAmount: number,
-    loanPeriod: number,
-    loanRate: number
-  ): Promise<Installment[]> {
+import { AbstractLoan } from "./AbstractLoan";
+import { Installment } from "../entity/Installment";
+
+export class LoanSac extends AbstractLoan {
+  generateInstallments(): Installment[] {
     const installments: Installment[] = [];
 
-    let balance = currency(loanAmount);
-    let rate = loanRate / 100;
+    let balance = currency(this.amount);
+    let rate = this.rate / 100;
     let installmentNumber = 1;
-    let amortization = currency(balance.value / loanPeriod);
+    let amortization = currency(balance.value / this.period);
 
     while (balance.value > 0) {
       let saldoInicial = currency(balance.value);
@@ -24,9 +20,10 @@ export class InstallmentGeneratorSac implements InstallmentGenerator {
       balance = currency(updatedBalance.value - amount.value);
 
       if (balance.value <= 0.05) balance = currency(0);
+
       installments.push(
         new Installment(
-          loanCode,
+          this.code,
           installmentNumber,
           amount.value,
           interest.value,
